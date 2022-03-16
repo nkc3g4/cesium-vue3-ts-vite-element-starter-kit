@@ -1,0 +1,2 @@
+define(["./BoxGeometry-14396797","./when-4bbc8319","./GeometryOffsetAttribute-7e016332","./RuntimeError-5b082e8f","./Transforms-8b90e17c","./Matrix2-265d9610","./ComponentDatatype-aad54330","./WebGLConstants-508b9636","./combine-e9466e32","./GeometryAttribute-4bcb785f","./GeometryAttributes-7827a6c2","./VertexFormat-07539138"],(function(e,t,r,o,n,b,m,a,i,c,u,f){"use strict";return function(r,o){return t.defined(o)&&(r=e.BoxGeometry.unpack(r,o)),e.BoxGeometry.createGeometry(r)}}));
+//# sourceMappingURL=createBoxGeometry.js.map
