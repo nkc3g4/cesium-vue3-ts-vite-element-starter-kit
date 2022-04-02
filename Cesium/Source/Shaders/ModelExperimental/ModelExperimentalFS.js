@@ -32,11 +32,16 @@ return vec4(color, 1.0);\n\
 SelectedFeature selectedFeature;\n\
 void main()\n\
 {\n\
+#ifdef HAS_MODEL_SPLITTER\n\
+modelSplitterStage();\n\
+#endif\n\
 czm_modelMaterial material = defaultModelMaterial();\n\
 ProcessedAttributes attributes;\n\
 geometryStage(attributes);\n\
 FeatureIds featureIds;\n\
 featureIdStage(featureIds, attributes);\n\
+Metadata metadata;\n\
+metadataStage(metadata, attributes);\n\
 #ifdef HAS_SELECTED_FEATURE_ID\n\
 selectedFeatureIdStage(selectedFeature, featureIds);\n\
 #endif\n\
@@ -44,9 +49,9 @@ selectedFeatureIdStage(selectedFeature, featureIds);\n\
 materialStage(material, attributes, selectedFeature);\n\
 #endif\n\
 #ifdef HAS_CUSTOM_FRAGMENT_SHADER\n\
-customShaderStage(material, attributes, featureIds);\n\
+customShaderStage(material, attributes, featureIds, metadata);\n\
 #endif\n\
-lightingStage(material);\n\
+lightingStage(material, attributes);\n\
 #ifdef HAS_SELECTED_FEATURE_ID\n\
 cpuStylingStage(material, selectedFeature);\n\
 #endif\n\
@@ -54,6 +59,9 @@ cpuStylingStage(material, selectedFeature);\n\
 modelColorStage(material);\n\
 #endif\n\
 vec4 color = handleAlpha(material.diffuse, material.alpha);\n\
+#ifdef HAS_CLIPPING_PLANES\n\
+modelClippingPlanesStage(color);\n\
+#endif\n\
 gl_FragColor = color;\n\
 }\n\
 ";

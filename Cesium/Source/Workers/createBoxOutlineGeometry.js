@@ -1,5 +1,5 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./GeometryOffsetAttribute-19e8bbd6', './Transforms-a91b6c40', './Matrix2-48c16a80', './RuntimeError-ec3b0f53', './ComponentDatatype-9c5a06cd', './when-8166c7dd', './GeometryAttribute-6ac0bf83', './GeometryAttributes-50becc99', './combine-ed18558d', './WebGLConstants-7dccdc96'], (function (GeometryOffsetAttribute, Transforms, Matrix2, RuntimeError, ComponentDatatype, when, GeometryAttribute, GeometryAttributes, combine, WebGLConstants) { 'use strict';
+define(['./GeometryOffsetAttribute-3e8c299c', './Transforms-c9f24aab', './Matrix2-feb45b00', './RuntimeError-c581ca93', './ComponentDatatype-b1ea011a', './defaultValue-94c3e563', './GeometryAttribute-a247c9b5', './GeometryAttributes-7df9bef6', './_commonjsHelpers-3aae1032-f55dc0c4', './combine-761d9c3f', './WebGLConstants-7dccdc96'], (function (GeometryOffsetAttribute, Transforms, Matrix2, RuntimeError, ComponentDatatype, defaultValue, GeometryAttribute, GeometryAttributes, _commonjsHelpers3aae1032, combine, WebGLConstants) { 'use strict';
 
   const diffScratch = new Matrix2.Cartesian3();
 
@@ -25,7 +25,7 @@ define(['./GeometryOffsetAttribute-19e8bbd6', './Transforms-a91b6c40', './Matrix
    * const geometry = Cesium.BoxOutlineGeometry.createGeometry(box);
    */
   function BoxOutlineGeometry(options) {
-    options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
 
     const min = options.minimum;
     const max = options.maximum;
@@ -34,7 +34,7 @@ define(['./GeometryOffsetAttribute-19e8bbd6', './Transforms-a91b6c40', './Matrix
     RuntimeError.Check.typeOf.object("min", min);
     RuntimeError.Check.typeOf.object("max", max);
     if (
-      when.defined(options.offsetAttribute) &&
+      defaultValue.defined(options.offsetAttribute) &&
       options.offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.TOP
     ) {
       throw new RuntimeError.DeveloperError(
@@ -68,7 +68,7 @@ define(['./GeometryOffsetAttribute-19e8bbd6', './Transforms-a91b6c40', './Matrix
    * @see BoxOutlineGeometry.createGeometry
    */
   BoxOutlineGeometry.fromDimensions = function (options) {
-    options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
     const dimensions = options.dimensions;
 
     //>>includeStart('debug', pragmas.debug);
@@ -139,11 +139,11 @@ define(['./GeometryOffsetAttribute-19e8bbd6', './Transforms-a91b6c40', './Matrix
     RuntimeError.Check.defined("array", array);
     //>>includeEnd('debug');
 
-    startingIndex = when.defaultValue(startingIndex, 0);
+    startingIndex = defaultValue.defaultValue(startingIndex, 0);
 
     Matrix2.Cartesian3.pack(value._min, array, startingIndex);
     Matrix2.Cartesian3.pack(value._max, array, startingIndex + Matrix2.Cartesian3.packedLength);
-    array[startingIndex + Matrix2.Cartesian3.packedLength * 2] = when.defaultValue(
+    array[startingIndex + Matrix2.Cartesian3.packedLength * 2] = defaultValue.defaultValue(
       value._offsetAttribute,
       -1
     );
@@ -172,7 +172,7 @@ define(['./GeometryOffsetAttribute-19e8bbd6', './Transforms-a91b6c40', './Matrix
     RuntimeError.Check.defined("array", array);
     //>>includeEnd('debug');
 
-    startingIndex = when.defaultValue(startingIndex, 0);
+    startingIndex = defaultValue.defaultValue(startingIndex, 0);
 
     const min = Matrix2.Cartesian3.unpack(array, startingIndex, scratchMin);
     const max = Matrix2.Cartesian3.unpack(
@@ -182,7 +182,7 @@ define(['./GeometryOffsetAttribute-19e8bbd6', './Transforms-a91b6c40', './Matrix
     );
     const offsetAttribute = array[startingIndex + Matrix2.Cartesian3.packedLength * 2];
 
-    if (!when.defined(result)) {
+    if (!defaultValue.defined(result)) {
       scratchOptions.offsetAttribute =
         offsetAttribute === -1 ? undefined : offsetAttribute;
       return new BoxOutlineGeometry(scratchOptions);
@@ -281,7 +281,7 @@ define(['./GeometryOffsetAttribute-19e8bbd6', './Transforms-a91b6c40', './Matrix
     const diff = Matrix2.Cartesian3.subtract(max, min, diffScratch);
     const radius = Matrix2.Cartesian3.magnitude(diff) * 0.5;
 
-    if (when.defined(boxGeometry._offsetAttribute)) {
+    if (defaultValue.defined(boxGeometry._offsetAttribute)) {
       const length = positions.length;
       const applyOffset = new Uint8Array(length / 3);
       const offsetValue =
@@ -304,7 +304,7 @@ define(['./GeometryOffsetAttribute-19e8bbd6', './Transforms-a91b6c40', './Matrix
   };
 
   function createBoxOutlineGeometry(boxGeometry, offset) {
-    if (when.defined(offset)) {
+    if (defaultValue.defined(offset)) {
       boxGeometry = BoxOutlineGeometry.unpack(boxGeometry, offset);
     }
     return BoxOutlineGeometry.createGeometry(boxGeometry);

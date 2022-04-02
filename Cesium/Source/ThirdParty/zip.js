@@ -4012,6 +4012,7 @@ function Inflate$1() {
 					istate.mode = DONE;
 				/* falls through */
 				case DONE:
+					z.avail_in = 0;
 					return Z_STREAM_END;
 				case BAD:
 					return Z_DATA_ERROR;
@@ -5024,6 +5025,37 @@ cipher.aes = class {
 	}
 };
 
+/**
+ * Random values
+ * @namespace
+ */
+const random = {
+	/** 
+	 * Generate random words with pure js, cryptographically not as strong & safe as native implementation.
+	 * @param {TypedArray} typedArray The array to fill.
+	 * @return {TypedArray} The random values.
+	 */
+	getRandomValues(typedArray) {
+		const words = new Uint32Array(typedArray.buffer);
+		const r = (m_w) => {
+			let m_z = 0x3ade68b1;
+			const mask = 0xffffffff;
+			return function () {
+				m_z = (0x9069 * (m_z & 0xFFFF) + (m_z >> 0x10)) & mask;
+				m_w = (0x4650 * (m_w & 0xFFFF) + (m_w >> 0x10)) & mask;
+				const result = ((((m_z << 0x10) + m_w) & mask) / 0x100000000) + .5;
+				return result * (Math.random() > .5 ? 1 : -1);
+			};
+		};
+		for (let i = 0, rcache; i < typedArray.length; i += 4) {
+			let _r = r((rcache || Math.random()) * 0x100000000);
+			rcache = _r() * 0x3ade67b7;
+			words[i / 4] = (_r() * 0x100000000) | 0;
+		}
+		return typedArray;
+	}
+};
+
 /** @fileOverview CTR mode implementation.
  *
  * Special thanks to Roy Nicholson for pointing out a bug in our
@@ -5121,8 +5153,38 @@ mode.ctrGladman = class {
 	}
 };
 
-
-const misc = {};
+const misc = {
+	importKey(password) {
+		return new misc.hmacSha1(codec.bytes.toBits(password));
+	},
+	pbkdf2(prf, salt, count, length) {
+		count = count || 10000;
+		if (length < 0 || count < 0) {
+			throw new Error("invalid params to pbkdf2");
+		}
+		const byteLength = ((length >> 5) + 1) << 2;
+		let u, ui, i, j, k;
+		const arrayBuffer = new ArrayBuffer(byteLength);
+		let out = new DataView(arrayBuffer);
+		let outLength = 0;
+		const b = bitArray;
+		salt = codec.bytes.toBits(salt);
+		for (k = 1; outLength < (byteLength || 1); k++) {
+			u = ui = prf.encrypt(b.concat(salt, [k]));
+			for (i = 1; i < count; i++) {
+				ui = prf.encrypt(ui);
+				for (j = 0; j < ui.length; j++) {
+					u[j] ^= ui[j];
+				}
+			}
+			for (i = 0; outLength < (byteLength || 1) && i < u.length; i++) {
+				out.setInt32(outLength, u[i]);
+				outLength += 4;
+			}
+		}
+		return arrayBuffer.slice(0, length / 8);
+	}
+};
 
 /** @fileOverview HMAC implementation.
  *
@@ -5179,6 +5241,15 @@ misc.hmacSha1 = class {
 
 		return result;
 	}
+
+	encrypt(data) {
+		if (!this._updated) {
+			this.update(data);
+			return this.digest(data);
+		} else {
+			throw new Error("encrypt on already updated hmac called!");
+		}
+	}
 };
 
 /*
@@ -5222,6 +5293,8 @@ const SALT_LENGTH = [8, 12, 16];
 const KEY_LENGTH = [16, 24, 32];
 const SIGNATURE_LENGTH = 10;
 const COUNTER_DEFAULT_VALUE = [0, 0, 0, 0];
+const CRYPTO_API_SUPPORTED = typeof crypto != "undefined";
+const SUBTLE_API_SUPPORTED = CRYPTO_API_SUPPORTED && typeof crypto.subtle != "undefined";
 const codecBytes = codec.bytes;
 const Aes = cipher.aes;
 const CtrGladman = mode.ctrGladman;
@@ -5351,21 +5424,45 @@ async function createDecryptionKeys(decrypt, preambleArray, password) {
 }
 
 async function createEncryptionKeys(encrypt, password) {
-	const salt = crypto.getRandomValues(new Uint8Array(SALT_LENGTH[encrypt.strength]));
+	const salt = getRandomValues(new Uint8Array(SALT_LENGTH[encrypt.strength]));
 	await createKeys$1(encrypt, password, salt);
 	return concat(salt, encrypt.keys.passwordVerification);
 }
 
 async function createKeys$1(target, password, salt) {
 	const encodedPassword = encodeText(password);
-	const basekey = await crypto.subtle.importKey(RAW_FORMAT, encodedPassword, BASE_KEY_ALGORITHM, false, DERIVED_BITS_USAGE);
-	const derivedBits = await crypto.subtle.deriveBits(Object.assign({ salt }, DERIVED_BITS_ALGORITHM), basekey, 8 * ((KEY_LENGTH[target.strength] * 2) + 2));
+	const basekey = await importKey(RAW_FORMAT, encodedPassword, BASE_KEY_ALGORITHM, false, DERIVED_BITS_USAGE);
+	const derivedBits = await deriveBits(Object.assign({ salt }, DERIVED_BITS_ALGORITHM), basekey, 8 * ((KEY_LENGTH[target.strength] * 2) + 2));
 	const compositeKey = new Uint8Array(derivedBits);
 	target.keys = {
 		key: codecBytes.toBits(subarray(compositeKey, 0, KEY_LENGTH[target.strength])),
 		authentication: codecBytes.toBits(subarray(compositeKey, KEY_LENGTH[target.strength], KEY_LENGTH[target.strength] * 2)),
 		passwordVerification: subarray(compositeKey, KEY_LENGTH[target.strength] * 2)
 	};
+}
+
+function getRandomValues(array) {
+	if (CRYPTO_API_SUPPORTED && typeof crypto.getRandomValues == "function") {
+		return crypto.getRandomValues(array);
+	} else {
+		return random.getRandomValues(array);
+	}
+}
+
+async function importKey(format, password, algorithm, extractable, keyUsages) {
+	if (CRYPTO_API_SUPPORTED && SUBTLE_API_SUPPORTED && typeof crypto.subtle.importKey == "function") {
+		return crypto.subtle.importKey(format, password, algorithm, extractable, keyUsages);
+	} else {
+		return misc.importKey(password);
+	}
+}
+
+async function deriveBits(algorithm, baseKey, length) {
+	if (CRYPTO_API_SUPPORTED && SUBTLE_API_SUPPORTED && typeof crypto.subtle.deriveBits == "function") {
+		return await crypto.subtle.deriveBits(algorithm, baseKey, length);
+	} else {
+		return misc.pbkdf2(baseKey, algorithm.salt, DERIVED_BITS_ALGORITHM.iterations, length);
+	}
 }
 
 function concat(leftArray, rightArray) {

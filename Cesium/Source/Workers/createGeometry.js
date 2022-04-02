@@ -1,5 +1,5 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./when-8166c7dd', './PrimitivePipeline-a08f4644', './createTaskProcessorWorker', './Transforms-a91b6c40', './Matrix2-48c16a80', './RuntimeError-ec3b0f53', './ComponentDatatype-9c5a06cd', './WebGLConstants-7dccdc96', './combine-ed18558d', './GeometryAttribute-6ac0bf83', './GeometryAttributes-50becc99', './GeometryPipeline-d53b53f4', './AttributeCompression-b90e9889', './EncodedCartesian3-316be0be', './IndexDatatype-ed482b61', './IntersectionTests-ef21c31d', './Plane-d604146d', './WebMercatorProjection-6244f98c'], (function (when, PrimitivePipeline, createTaskProcessorWorker, Transforms, Matrix2, RuntimeError, ComponentDatatype, WebGLConstants, combine, GeometryAttribute, GeometryAttributes, GeometryPipeline, AttributeCompression, EncodedCartesian3, IndexDatatype, IntersectionTests, Plane, WebMercatorProjection) { 'use strict';
+define(['./defaultValue-94c3e563', './PrimitivePipeline-d0a28f39', './createTaskProcessorWorker', './Transforms-c9f24aab', './Matrix2-feb45b00', './RuntimeError-c581ca93', './ComponentDatatype-b1ea011a', './WebGLConstants-7dccdc96', './_commonjsHelpers-3aae1032-f55dc0c4', './combine-761d9c3f', './GeometryAttribute-a247c9b5', './GeometryAttributes-7df9bef6', './GeometryPipeline-8bdf78c5', './AttributeCompression-b89638a2', './EncodedCartesian3-7fbeca3f', './IndexDatatype-c4099fe9', './IntersectionTests-cddae83a', './Plane-d4dd64b5', './WebMercatorProjection-dd5549ea'], (function (defaultValue, PrimitivePipeline, createTaskProcessorWorker, Transforms, Matrix2, RuntimeError, ComponentDatatype, WebGLConstants, _commonjsHelpers3aae1032, combine, GeometryAttribute, GeometryAttributes, GeometryPipeline, AttributeCompression, EncodedCartesian3, IndexDatatype, IntersectionTests, Plane, WebMercatorProjection) { 'use strict';
 
   /* global require */
 
@@ -7,7 +7,7 @@ define(['./when-8166c7dd', './PrimitivePipeline-a08f4644', './createTaskProcesso
 
   function getModule(moduleName) {
     let module = moduleCache[moduleName];
-    if (!when.defined(module)) {
+    if (!defaultValue.defined(module)) {
       if (typeof exports === "object") {
         // Use CommonJS-style require.
         moduleCache[module] = module = require(`Workers/${moduleName}`);
@@ -33,7 +33,7 @@ define(['./when-8166c7dd', './PrimitivePipeline-a08f4644', './createTaskProcesso
       const geometry = task.geometry;
       const moduleName = task.moduleName;
 
-      if (when.defined(moduleName)) {
+      if (defaultValue.defined(moduleName)) {
         const createFunction = getModule(moduleName);
         resultsOrPromises[i] = createFunction(geometry, task.offset);
       } else {
@@ -42,7 +42,7 @@ define(['./when-8166c7dd', './PrimitivePipeline-a08f4644', './createTaskProcesso
       }
     }
 
-    return when.when.all(resultsOrPromises, function (results) {
+    return Promise.all(resultsOrPromises).then(function (results) {
       return PrimitivePipeline.PrimitivePipeline.packCreateGeometryResults(
         results,
         transferableObjects

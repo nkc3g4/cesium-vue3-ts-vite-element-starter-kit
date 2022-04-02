@@ -1,5 +1,5 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./when-8166c7dd', './Transforms-a91b6c40', './Matrix2-48c16a80', './RuntimeError-ec3b0f53', './ComponentDatatype-9c5a06cd', './GeometryAttribute-6ac0bf83', './GeometryAttributes-50becc99', './combine-ed18558d', './WebGLConstants-7dccdc96'], (function (when, Transforms, Matrix2, RuntimeError, ComponentDatatype, GeometryAttribute, GeometryAttributes, combine, WebGLConstants) { 'use strict';
+define(['./defaultValue-94c3e563', './Transforms-c9f24aab', './Matrix2-feb45b00', './RuntimeError-c581ca93', './ComponentDatatype-b1ea011a', './GeometryAttribute-a247c9b5', './GeometryAttributes-7df9bef6', './_commonjsHelpers-3aae1032-f55dc0c4', './combine-761d9c3f', './WebGLConstants-7dccdc96'], (function (defaultValue, Transforms, Matrix2, RuntimeError, ComponentDatatype, GeometryAttribute, GeometryAttributes, _commonjsHelpers3aae1032, combine, WebGLConstants) { 'use strict';
 
   /**
    * Describes geometry representing the outline of a plane centered at the origin, with a unit width and length.
@@ -48,7 +48,7 @@ define(['./when-8166c7dd', './Transforms-a91b6c40', './Matrix2-48c16a80', './Run
     RuntimeError.Check.defined("array", array);
     //>>includeEnd('debug');
 
-    if (!when.defined(result)) {
+    if (!defaultValue.defined(result)) {
       return new PlaneOutlineGeometry();
     }
 
@@ -105,7 +105,7 @@ define(['./when-8166c7dd', './Transforms-a91b6c40', './Matrix2-48c16a80', './Run
   };
 
   function createPlaneOutlineGeometry(planeGeometry, offset) {
-    if (when.defined(offset)) {
+    if (defaultValue.defined(offset)) {
       planeGeometry = PlaneOutlineGeometry.unpack(planeGeometry, offset);
     }
     return PlaneOutlineGeometry.createGeometry(planeGeometry);

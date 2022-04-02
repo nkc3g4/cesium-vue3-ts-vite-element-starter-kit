@@ -1,5 +1,5 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./when-8166c7dd', './Matrix2-48c16a80', './ArcType-0cf52f8c', './Transforms-a91b6c40', './Color-cc8b6b48', './ComponentDatatype-9c5a06cd', './RuntimeError-ec3b0f53', './GeometryAttribute-6ac0bf83', './GeometryAttributes-50becc99', './IndexDatatype-ed482b61', './PolylinePipeline-dc8ba823', './combine-ed18558d', './WebGLConstants-7dccdc96', './EllipsoidGeodesic-9be6c4a4', './EllipsoidRhumbLine-18e41c26', './IntersectionTests-ef21c31d', './Plane-d604146d'], (function (when, Matrix2, ArcType, Transforms, Color, ComponentDatatype, RuntimeError, GeometryAttribute, GeometryAttributes, IndexDatatype, PolylinePipeline, combine, WebGLConstants, EllipsoidGeodesic, EllipsoidRhumbLine, IntersectionTests, Plane) { 'use strict';
+define(['./defaultValue-94c3e563', './Matrix2-feb45b00', './ArcType-0cf52f8c', './Transforms-c9f24aab', './Color-de24acbe', './ComponentDatatype-b1ea011a', './RuntimeError-c581ca93', './GeometryAttribute-a247c9b5', './GeometryAttributes-7df9bef6', './IndexDatatype-c4099fe9', './PolylinePipeline-37daf402', './_commonjsHelpers-3aae1032-f55dc0c4', './combine-761d9c3f', './WebGLConstants-7dccdc96', './EllipsoidGeodesic-0f954b03', './EllipsoidRhumbLine-be32f017', './IntersectionTests-cddae83a', './Plane-d4dd64b5'], (function (defaultValue, Matrix2, ArcType, Transforms, Color, ComponentDatatype, RuntimeError, GeometryAttribute, GeometryAttributes, IndexDatatype, PolylinePipeline, _commonjsHelpers3aae1032, combine, WebGLConstants, EllipsoidGeodesic, EllipsoidRhumbLine, IntersectionTests, Plane) { 'use strict';
 
   function interpolateColors(p0, p1, color0, color1, minDistance, array, offset) {
     const numPoints = PolylinePipeline.PolylinePipeline.numberOfPoints(p0, p1, minDistance);
@@ -73,17 +73,17 @@ define(['./when-8166c7dd', './Matrix2-48c16a80', './ArcType-0cf52f8c', './Transf
    * const geometry = Cesium.SimplePolylineGeometry.createGeometry(polyline);
    */
   function SimplePolylineGeometry(options) {
-    options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
     const positions = options.positions;
     const colors = options.colors;
-    const colorsPerVertex = when.defaultValue(options.colorsPerVertex, false);
+    const colorsPerVertex = defaultValue.defaultValue(options.colorsPerVertex, false);
 
     //>>includeStart('debug', pragmas.debug);
-    if (!when.defined(positions) || positions.length < 2) {
+    if (!defaultValue.defined(positions) || positions.length < 2) {
       throw new RuntimeError.DeveloperError("At least two positions are required.");
     }
     if (
-      when.defined(colors) &&
+      defaultValue.defined(colors) &&
       ((colorsPerVertex && colors.length < positions.length) ||
         (!colorsPerVertex && colors.length < positions.length - 1))
     ) {
@@ -95,16 +95,16 @@ define(['./when-8166c7dd', './Matrix2-48c16a80', './ArcType-0cf52f8c', './Transf
     this._colors = colors;
     this._colorsPerVertex = colorsPerVertex;
 
-    this._arcType = when.defaultValue(options.arcType, ArcType.ArcType.GEODESIC);
-    this._granularity = when.defaultValue(
+    this._arcType = defaultValue.defaultValue(options.arcType, ArcType.ArcType.GEODESIC);
+    this._granularity = defaultValue.defaultValue(
       options.granularity,
       ComponentDatatype.CesiumMath.RADIANS_PER_DEGREE
     );
-    this._ellipsoid = when.defaultValue(options.ellipsoid, Matrix2.Ellipsoid.WGS84);
+    this._ellipsoid = defaultValue.defaultValue(options.ellipsoid, Matrix2.Ellipsoid.WGS84);
     this._workerName = "createSimplePolylineGeometry";
 
     let numComponents = 1 + positions.length * Matrix2.Cartesian3.packedLength;
-    numComponents += when.defined(colors) ? 1 + colors.length * Color.Color.packedLength : 1;
+    numComponents += defaultValue.defined(colors) ? 1 + colors.length * Color.Color.packedLength : 1;
 
     /**
      * The number of elements used to pack the object into an array.
@@ -124,15 +124,15 @@ define(['./when-8166c7dd', './Matrix2-48c16a80', './ArcType-0cf52f8c', './Transf
    */
   SimplePolylineGeometry.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
-    if (!when.defined(value)) {
+    if (!defaultValue.defined(value)) {
       throw new RuntimeError.DeveloperError("value is required");
     }
-    if (!when.defined(array)) {
+    if (!defaultValue.defined(array)) {
       throw new RuntimeError.DeveloperError("array is required");
     }
     //>>includeEnd('debug');
 
-    startingIndex = when.defaultValue(startingIndex, 0);
+    startingIndex = defaultValue.defaultValue(startingIndex, 0);
 
     let i;
 
@@ -145,7 +145,7 @@ define(['./when-8166c7dd', './Matrix2-48c16a80', './ArcType-0cf52f8c', './Transf
     }
 
     const colors = value._colors;
-    length = when.defined(colors) ? colors.length : 0.0;
+    length = defaultValue.defined(colors) ? colors.length : 0.0;
     array[startingIndex++] = length;
 
     for (i = 0; i < length; ++i, startingIndex += Color.Color.packedLength) {
@@ -172,12 +172,12 @@ define(['./when-8166c7dd', './Matrix2-48c16a80', './ArcType-0cf52f8c', './Transf
    */
   SimplePolylineGeometry.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
-    if (!when.defined(array)) {
+    if (!defaultValue.defined(array)) {
       throw new RuntimeError.DeveloperError("array is required");
     }
     //>>includeEnd('debug');
 
-    startingIndex = when.defaultValue(startingIndex, 0);
+    startingIndex = defaultValue.defaultValue(startingIndex, 0);
 
     let i;
 
@@ -202,7 +202,7 @@ define(['./when-8166c7dd', './Matrix2-48c16a80', './ArcType-0cf52f8c', './Transf
     const arcType = array[startingIndex++];
     const granularity = array[startingIndex];
 
-    if (!when.defined(result)) {
+    if (!defaultValue.defined(result)) {
       return new SimplePolylineGeometry({
         positions: positions,
         colors: colors,
@@ -251,7 +251,7 @@ define(['./when-8166c7dd', './Matrix2-48c16a80', './ArcType-0cf52f8c', './Transf
       granularity,
       ellipsoid.maximumRadius
     );
-    const perSegmentColors = when.defined(colors) && !colorsPerVertex;
+    const perSegmentColors = defaultValue.defined(colors) && !colorsPerVertex;
 
     let i;
     const length = positions.length;
@@ -316,7 +316,7 @@ define(['./when-8166c7dd', './Matrix2-48c16a80', './ArcType-0cf52f8c', './Transf
 
           const pos = generateArcFunction(generateArcOptions);
 
-          if (when.defined(colors)) {
+          if (defaultValue.defined(colors)) {
             const segLen = pos.length / 3;
             color = colors[i];
             for (let k = 0; k < segLen; ++k) {
@@ -337,7 +337,7 @@ define(['./when-8166c7dd', './Matrix2-48c16a80', './ArcType-0cf52f8c', './Transf
           generateArcFunction(generateArcOptions)
         );
 
-        if (when.defined(colors)) {
+        if (defaultValue.defined(colors)) {
           colorValues = new Uint8Array((positionValues.length / 3) * 4);
 
           for (i = 0; i < length - 1; ++i) {
@@ -366,7 +366,7 @@ define(['./when-8166c7dd', './Matrix2-48c16a80', './ArcType-0cf52f8c', './Transf
     } else {
       numberOfPositions = perSegmentColors ? length * 2 - 2 : length;
       positionValues = new Float64Array(numberOfPositions * 3);
-      colorValues = when.defined(colors)
+      colorValues = defaultValue.defined(colors)
         ? new Uint8Array(numberOfPositions * 4)
         : undefined;
 
@@ -394,7 +394,7 @@ define(['./when-8166c7dd', './Matrix2-48c16a80', './ArcType-0cf52f8c', './Transf
         Matrix2.Cartesian3.pack(p, positionValues, positionIndex);
         positionIndex += 3;
 
-        if (when.defined(colors)) {
+        if (defaultValue.defined(colors)) {
           color = colors[i];
           colorValues[colorIndex++] = Color.Color.floatToByte(color.red);
           colorValues[colorIndex++] = Color.Color.floatToByte(color.green);
@@ -411,7 +411,7 @@ define(['./when-8166c7dd', './Matrix2-48c16a80', './ArcType-0cf52f8c', './Transf
       values: positionValues,
     });
 
-    if (when.defined(colors)) {
+    if (defaultValue.defined(colors)) {
       attributes.color = new GeometryAttribute.GeometryAttribute({
         componentDatatype: ComponentDatatype.ComponentDatatype.UNSIGNED_BYTE,
         componentsPerAttribute: 4,
@@ -442,7 +442,7 @@ define(['./when-8166c7dd', './Matrix2-48c16a80', './ArcType-0cf52f8c', './Transf
   };
 
   function createSimplePolylineGeometry(simplePolylineGeometry, offset) {
-    if (when.defined(offset)) {
+    if (defaultValue.defined(offset)) {
       simplePolylineGeometry = SimplePolylineGeometry.unpack(
         simplePolylineGeometry,
         offset

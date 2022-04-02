@@ -1,5 +1,5 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./when-8166c7dd', './Matrix2-48c16a80', './RuntimeError-ec3b0f53', './EllipsoidGeometry-bc0b9b9b', './VertexFormat-36162c59', './ComponentDatatype-9c5a06cd', './WebGLConstants-7dccdc96', './GeometryOffsetAttribute-19e8bbd6', './Transforms-a91b6c40', './combine-ed18558d', './GeometryAttribute-6ac0bf83', './GeometryAttributes-50becc99', './IndexDatatype-ed482b61'], (function (when, Matrix2, RuntimeError, EllipsoidGeometry, VertexFormat, ComponentDatatype, WebGLConstants, GeometryOffsetAttribute, Transforms, combine, GeometryAttribute, GeometryAttributes, IndexDatatype) { 'use strict';
+define(['./defaultValue-94c3e563', './Matrix2-feb45b00', './RuntimeError-c581ca93', './EllipsoidGeometry-cccb040b', './VertexFormat-e46f29d6', './ComponentDatatype-b1ea011a', './WebGLConstants-7dccdc96', './GeometryOffsetAttribute-3e8c299c', './Transforms-c9f24aab', './_commonjsHelpers-3aae1032-f55dc0c4', './combine-761d9c3f', './GeometryAttribute-a247c9b5', './GeometryAttributes-7df9bef6', './IndexDatatype-c4099fe9'], (function (defaultValue, Matrix2, RuntimeError, EllipsoidGeometry, VertexFormat, ComponentDatatype, WebGLConstants, GeometryOffsetAttribute, Transforms, _commonjsHelpers3aae1032, combine, GeometryAttribute, GeometryAttributes, IndexDatatype) { 'use strict';
 
   /**
    * A description of a sphere centered at the origin.
@@ -26,7 +26,7 @@ define(['./when-8166c7dd', './Matrix2-48c16a80', './RuntimeError-ec3b0f53', './E
    * const geometry = Cesium.SphereGeometry.createGeometry(sphere);
    */
   function SphereGeometry(options) {
-    const radius = when.defaultValue(options.radius, 1.0);
+    const radius = defaultValue.defaultValue(options.radius, 1.0);
     const radii = new Matrix2.Cartesian3(radius, radius, radius);
     const ellipsoidOptions = {
       radii: radii,
@@ -92,7 +92,7 @@ define(['./when-8166c7dd', './Matrix2-48c16a80', './RuntimeError-ec3b0f53', './E
     scratchOptions.stackPartitions = ellipsoidGeometry._stackPartitions;
     scratchOptions.slicePartitions = ellipsoidGeometry._slicePartitions;
 
-    if (!when.defined(result)) {
+    if (!defaultValue.defined(result)) {
       scratchOptions.radius = ellipsoidGeometry._radii.x;
       return new SphereGeometry(scratchOptions);
     }
@@ -113,7 +113,7 @@ define(['./when-8166c7dd', './Matrix2-48c16a80', './RuntimeError-ec3b0f53', './E
   };
 
   function createSphereGeometry(sphereGeometry, offset) {
-    if (when.defined(offset)) {
+    if (defaultValue.defined(offset)) {
       sphereGeometry = SphereGeometry.unpack(sphereGeometry, offset);
     }
     return SphereGeometry.createGeometry(sphereGeometry);

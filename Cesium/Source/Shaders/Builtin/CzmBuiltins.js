@@ -104,6 +104,7 @@ import czm_reverseLogDepth from './Functions/reverseLogDepth.js'
 import czm_RGBToHSB from './Functions/RGBToHSB.js'
 import czm_RGBToHSL from './Functions/RGBToHSL.js'
 import czm_RGBToXYZ from './Functions/RGBToXYZ.js'
+import czm_round from './Functions/round.js'
 import czm_sampleOctahedralProjection from './Functions/sampleOctahedralProjection.js'
 import czm_saturation from './Functions/saturation.js'
 import czm_shadowDepthCompare from './Functions/shadowDepthCompare.js'
@@ -118,6 +119,8 @@ import czm_translucentPhong from './Functions/translucentPhong.js'
 import czm_transpose from './Functions/transpose.js'
 import czm_unpackDepth from './Functions/unpackDepth.js'
 import czm_unpackFloat from './Functions/unpackFloat.js'
+import czm_unpackUint from './Functions/unpackUint.js'
+import czm_valueTransform from './Functions/valueTransform.js'
 import czm_vertexLogDepth from './Functions/vertexLogDepth.js'
 import czm_windowToEyeCoordinates from './Functions/windowToEyeCoordinates.js'
 import czm_writeDepthClamp from './Functions/writeDepthClamp.js'
@@ -231,6 +234,7 @@ export default {
     czm_RGBToHSB : czm_RGBToHSB,
     czm_RGBToHSL : czm_RGBToHSL,
     czm_RGBToXYZ : czm_RGBToXYZ,
+    czm_round : czm_round,
     czm_sampleOctahedralProjection : czm_sampleOctahedralProjection,
     czm_saturation : czm_saturation,
     czm_shadowDepthCompare : czm_shadowDepthCompare,
@@ -245,6 +249,8 @@ export default {
     czm_transpose : czm_transpose,
     czm_unpackDepth : czm_unpackDepth,
     czm_unpackFloat : czm_unpackFloat,
+    czm_unpackUint : czm_unpackUint,
+    czm_valueTransform : czm_valueTransform,
     czm_vertexLogDepth : czm_vertexLogDepth,
     czm_windowToEyeCoordinates : czm_windowToEyeCoordinates,
     czm_writeDepthClamp : czm_writeDepthClamp,

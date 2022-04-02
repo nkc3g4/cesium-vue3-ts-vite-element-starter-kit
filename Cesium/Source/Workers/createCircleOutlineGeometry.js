@@ -1,5 +1,5 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./Matrix2-48c16a80', './RuntimeError-ec3b0f53', './when-8166c7dd', './EllipseOutlineGeometry-0dfcffeb', './ComponentDatatype-9c5a06cd', './WebGLConstants-7dccdc96', './GeometryOffsetAttribute-19e8bbd6', './Transforms-a91b6c40', './combine-ed18558d', './EllipseGeometryLibrary-0f0fd2b0', './GeometryAttribute-6ac0bf83', './GeometryAttributes-50becc99', './IndexDatatype-ed482b61'], (function (Matrix2, RuntimeError, when, EllipseOutlineGeometry, ComponentDatatype, WebGLConstants, GeometryOffsetAttribute, Transforms, combine, EllipseGeometryLibrary, GeometryAttribute, GeometryAttributes, IndexDatatype) { 'use strict';
+define(['./Matrix2-feb45b00', './RuntimeError-c581ca93', './defaultValue-94c3e563', './EllipseOutlineGeometry-bd330912', './ComponentDatatype-b1ea011a', './WebGLConstants-7dccdc96', './GeometryOffsetAttribute-3e8c299c', './Transforms-c9f24aab', './_commonjsHelpers-3aae1032-f55dc0c4', './combine-761d9c3f', './EllipseGeometryLibrary-3d58ec34', './GeometryAttribute-a247c9b5', './GeometryAttributes-7df9bef6', './IndexDatatype-c4099fe9'], (function (Matrix2, RuntimeError, defaultValue, EllipseOutlineGeometry, ComponentDatatype, WebGLConstants, GeometryOffsetAttribute, Transforms, _commonjsHelpers3aae1032, combine, EllipseGeometryLibrary, GeometryAttribute, GeometryAttributes, IndexDatatype) { 'use strict';
 
   /**
    * A description of the outline of a circle on the ellipsoid.
@@ -31,7 +31,7 @@ define(['./Matrix2-48c16a80', './RuntimeError-ec3b0f53', './when-8166c7dd', './E
    * const geometry = Cesium.CircleOutlineGeometry.createGeometry(circle);
    */
   function CircleOutlineGeometry(options) {
-    options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
     const radius = options.radius;
 
     //>>includeStart('debug', pragmas.debug);
@@ -122,7 +122,7 @@ define(['./Matrix2-48c16a80', './RuntimeError-ec3b0f53', './when-8166c7dd', './E
     scratchOptions.granularity = ellipseGeometry._granularity;
     scratchOptions.numberOfVerticalLines = ellipseGeometry._numberOfVerticalLines;
 
-    if (!when.defined(result)) {
+    if (!defaultValue.defined(result)) {
       scratchOptions.radius = ellipseGeometry._semiMajorAxis;
       return new CircleOutlineGeometry(scratchOptions);
     }
@@ -144,7 +144,7 @@ define(['./Matrix2-48c16a80', './RuntimeError-ec3b0f53', './when-8166c7dd', './E
   };
 
   function createCircleOutlineGeometry(circleGeometry, offset) {
-    if (when.defined(offset)) {
+    if (defaultValue.defined(offset)) {
       circleGeometry = CircleOutlineGeometry.unpack(circleGeometry, offset);
     }
     circleGeometry._ellipseGeometry._center = Matrix2.Cartesian3.clone(

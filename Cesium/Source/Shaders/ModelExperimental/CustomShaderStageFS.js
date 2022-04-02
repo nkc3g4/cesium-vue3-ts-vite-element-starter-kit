@@ -2,11 +2,13 @@
 export default "void customShaderStage(\n\
 inout czm_modelMaterial material,\n\
 ProcessedAttributes attributes,\n\
-FeatureIds featureIds\n\
+FeatureIds featureIds,\n\
+Metadata metadata\n\
 ) {\n\
 FragmentInput fsInput;\n\
 initializeInputStruct(fsInput, attributes);\n\
 fsInput.featureIds = featureIds;\n\
+fsInput.metadata = metadata;\n\
 fragmentMain(fsInput, material);\n\
 }\n\
 ";

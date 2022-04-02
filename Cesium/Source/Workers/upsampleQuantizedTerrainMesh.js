@@ -1,5 +1,5 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./AttributeCompression-b90e9889', './Transforms-a91b6c40', './Matrix2-48c16a80', './when-8166c7dd', './TerrainEncoding-e4d00da3', './IndexDatatype-ed482b61', './RuntimeError-ec3b0f53', './ComponentDatatype-9c5a06cd', './OrientedBoundingBox-0c4e9bcf', './createTaskProcessorWorker', './combine-ed18558d', './WebGLConstants-7dccdc96', './EllipsoidTangentPlane-e87970b1', './AxisAlignedBoundingBox-f8eef3e4', './IntersectionTests-ef21c31d', './Plane-d604146d'], (function (AttributeCompression, Transforms, Matrix2, when, TerrainEncoding, IndexDatatype, RuntimeError, ComponentDatatype, OrientedBoundingBox, createTaskProcessorWorker, combine, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane) { 'use strict';
+define(['./AttributeCompression-b89638a2', './Transforms-c9f24aab', './Matrix2-feb45b00', './defaultValue-94c3e563', './TerrainEncoding-66b01f66', './IndexDatatype-c4099fe9', './RuntimeError-c581ca93', './ComponentDatatype-b1ea011a', './OrientedBoundingBox-2cc6d1a0', './createTaskProcessorWorker', './_commonjsHelpers-3aae1032-f55dc0c4', './combine-761d9c3f', './WebGLConstants-7dccdc96', './EllipsoidTangentPlane-e5585342', './AxisAlignedBoundingBox-79bc34f8', './IntersectionTests-cddae83a', './Plane-d4dd64b5'], (function (AttributeCompression, Transforms, Matrix2, defaultValue, TerrainEncoding, IndexDatatype, RuntimeError, ComponentDatatype, OrientedBoundingBox, createTaskProcessorWorker, _commonjsHelpers3aae1032, combine, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane) { 'use strict';
 
   /**
    * Contains functions for operating on 2D triangles.
@@ -43,24 +43,24 @@ define(['./AttributeCompression-b90e9889', './Transforms-a91b6c40', './Matrix2-4
     result
   ) {
     //>>includeStart('debug', pragmas.debug);
-    if (!when.defined(threshold)) {
+    if (!defaultValue.defined(threshold)) {
       throw new RuntimeError.DeveloperError("threshold is required.");
     }
-    if (!when.defined(keepAbove)) {
+    if (!defaultValue.defined(keepAbove)) {
       throw new RuntimeError.DeveloperError("keepAbove is required.");
     }
-    if (!when.defined(u0)) {
+    if (!defaultValue.defined(u0)) {
       throw new RuntimeError.DeveloperError("u0 is required.");
     }
-    if (!when.defined(u1)) {
+    if (!defaultValue.defined(u1)) {
       throw new RuntimeError.DeveloperError("u1 is required.");
     }
-    if (!when.defined(u2)) {
+    if (!defaultValue.defined(u2)) {
       throw new RuntimeError.DeveloperError("u2 is required.");
     }
     //>>includeEnd('debug');
 
-    if (!when.defined(result)) {
+    if (!defaultValue.defined(result)) {
       result = [];
     } else {
       result.length = 0;
@@ -242,28 +242,28 @@ define(['./AttributeCompression-b90e9889', './Transforms-a91b6c40', './Matrix2-4
     result
   ) {
     //>>includeStart('debug', pragmas.debug);
-    if (!when.defined(x)) {
+    if (!defaultValue.defined(x)) {
       throw new RuntimeError.DeveloperError("x is required.");
     }
-    if (!when.defined(y)) {
+    if (!defaultValue.defined(y)) {
       throw new RuntimeError.DeveloperError("y is required.");
     }
-    if (!when.defined(x1)) {
+    if (!defaultValue.defined(x1)) {
       throw new RuntimeError.DeveloperError("x1 is required.");
     }
-    if (!when.defined(y1)) {
+    if (!defaultValue.defined(y1)) {
       throw new RuntimeError.DeveloperError("y1 is required.");
     }
-    if (!when.defined(x2)) {
+    if (!defaultValue.defined(x2)) {
       throw new RuntimeError.DeveloperError("x2 is required.");
     }
-    if (!when.defined(y2)) {
+    if (!defaultValue.defined(y2)) {
       throw new RuntimeError.DeveloperError("y2 is required.");
     }
-    if (!when.defined(x3)) {
+    if (!defaultValue.defined(x3)) {
       throw new RuntimeError.DeveloperError("x3 is required.");
     }
-    if (!when.defined(y3)) {
+    if (!defaultValue.defined(y3)) {
       throw new RuntimeError.DeveloperError("y3 is required.");
     }
     //>>includeEnd('debug');
@@ -279,7 +279,7 @@ define(['./AttributeCompression-b90e9889', './Transforms-a91b6c40', './Matrix2-4
     const l2 = (-y1my3 * xmx3 + x1mx3 * ymy3) * inverseDeterminant;
     const l3 = 1.0 - l1 - l2;
 
-    if (when.defined(result)) {
+    if (defaultValue.defined(result)) {
       result.x = l1;
       result.y = l2;
       result.z = l3;
@@ -342,7 +342,7 @@ define(['./AttributeCompression-b90e9889', './Transforms-a91b6c40', './Matrix2-4
     const ub1 = numerator1B / denominator1;
 
     if (ua1 >= 0 && ua1 <= 1 && ub1 >= 0 && ub1 <= 1) {
-      if (!when.defined(result)) {
+      if (!defaultValue.defined(result)) {
         result = new Matrix2.Cartesian2();
       }
 
@@ -793,7 +793,7 @@ define(['./AttributeCompression-b90e9889', './Transforms-a91b6c40', './Matrix2-4
   }
 
   Vertex.prototype.clone = function (result) {
-    if (!when.defined(result)) {
+    if (!defaultValue.defined(result)) {
       result = new Vertex();
     }
 
@@ -861,25 +861,25 @@ define(['./AttributeCompression-b90e9889', './Transforms-a91b6c40', './Matrix2-4
   };
 
   Vertex.prototype.isIndexed = function () {
-    return when.defined(this.index);
+    return defaultValue.defined(this.index);
   };
 
   Vertex.prototype.getH = function () {
-    if (when.defined(this.index)) {
+    if (defaultValue.defined(this.index)) {
       return this.heightBuffer[this.index];
     }
     return ComponentDatatype.CesiumMath.lerp(this.first.getH(), this.second.getH(), this.ratio);
   };
 
   Vertex.prototype.getU = function () {
-    if (when.defined(this.index)) {
+    if (defaultValue.defined(this.index)) {
       return this.uBuffer[this.index];
     }
     return ComponentDatatype.CesiumMath.lerp(this.first.getU(), this.second.getU(), this.ratio);
   };
 
   Vertex.prototype.getV = function () {
-    if (when.defined(this.index)) {
+    if (defaultValue.defined(this.index)) {
       return this.vBuffer[this.index];
     }
     return ComponentDatatype.CesiumMath.lerp(this.first.getV(), this.second.getV(), this.ratio);
@@ -923,7 +923,7 @@ define(['./AttributeCompression-b90e9889', './Transforms-a91b6c40', './Matrix2-4
   }
 
   Vertex.prototype.getNormalX = function () {
-    if (when.defined(this.index)) {
+    if (defaultValue.defined(this.index)) {
       return this.normalBuffer[this.index * 2];
     }
 
@@ -932,7 +932,7 @@ define(['./AttributeCompression-b90e9889', './Transforms-a91b6c40', './Matrix2-4
   };
 
   Vertex.prototype.getNormalY = function () {
-    if (when.defined(this.index)) {
+    if (defaultValue.defined(this.index)) {
       return this.normalBuffer[this.index * 2 + 1];
     }
 
@@ -975,7 +975,7 @@ define(['./AttributeCompression-b90e9889', './Transforms-a91b6c40', './Matrix2-4
       const polygonVertex = polygonVertices[i];
       if (!polygonVertex.isIndexed()) {
         const key = polygonVertex.getKey();
-        if (when.defined(vertexMap[key])) {
+        if (defaultValue.defined(vertexMap[key])) {
           polygonVertex.newIndex = vertexMap[key];
         } else {
           const newIndex = uBuffer.length;

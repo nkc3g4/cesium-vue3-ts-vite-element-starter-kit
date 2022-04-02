@@ -152,7 +152,7 @@ function RenderState(renderState) {
   this.depthMask = defaultValue(rs.depthMask, true);
   this.stencilMask = defaultValue(rs.stencilMask, ~0);
   this.blending = {
-    enabled: defaultValue(blending.enabled, true),
+    enabled: defaultValue(blending.enabled, false),
     color: new Color(
       defaultValue(blendingColor.red, 0.0),
       defaultValue(blendingColor.green, 0.0),
@@ -663,7 +663,7 @@ function applyBlending(gl, renderState, passState) {
   const enabled = defined(passState.blendingEnabled)
     ? passState.blendingEnabled
     : blending.enabled;
-  // const enabled = true;
+
   enableOrDisable(gl, gl.BLEND, enabled);
 
   if (enabled) {

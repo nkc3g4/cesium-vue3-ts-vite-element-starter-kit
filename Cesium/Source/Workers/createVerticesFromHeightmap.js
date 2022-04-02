@@ -1,5 +1,5 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./Matrix2-48c16a80', './AxisAlignedBoundingBox-f8eef3e4', './Transforms-a91b6c40', './when-8166c7dd', './RuntimeError-ec3b0f53', './TerrainEncoding-e4d00da3', './ComponentDatatype-9c5a06cd', './OrientedBoundingBox-0c4e9bcf', './WebMercatorProjection-6244f98c', './createTaskProcessorWorker', './combine-ed18558d', './AttributeCompression-b90e9889', './WebGLConstants-7dccdc96', './EllipsoidTangentPlane-e87970b1', './IntersectionTests-ef21c31d', './Plane-d604146d'], (function (Matrix2, AxisAlignedBoundingBox, Transforms, when, RuntimeError, TerrainEncoding, ComponentDatatype, OrientedBoundingBox, WebMercatorProjection, createTaskProcessorWorker, combine, AttributeCompression, WebGLConstants, EllipsoidTangentPlane, IntersectionTests, Plane) { 'use strict';
+define(['./Matrix2-feb45b00', './AxisAlignedBoundingBox-79bc34f8', './Transforms-c9f24aab', './defaultValue-94c3e563', './RuntimeError-c581ca93', './TerrainEncoding-66b01f66', './ComponentDatatype-b1ea011a', './OrientedBoundingBox-2cc6d1a0', './WebMercatorProjection-dd5549ea', './_commonjsHelpers-3aae1032-f55dc0c4', './createTaskProcessorWorker', './combine-761d9c3f', './AttributeCompression-b89638a2', './WebGLConstants-7dccdc96', './EllipsoidTangentPlane-e5585342', './IntersectionTests-cddae83a', './Plane-d4dd64b5'], (function (Matrix2, AxisAlignedBoundingBox, Transforms, defaultValue, RuntimeError, TerrainEncoding, ComponentDatatype, OrientedBoundingBox, WebMercatorProjection, _commonjsHelpers3aae1032, createTaskProcessorWorker, combine, AttributeCompression, WebGLConstants, EllipsoidTangentPlane, IntersectionTests, Plane) { 'use strict';
 
   /**
    * The encoding that is used for a heightmap
@@ -127,16 +127,16 @@ define(['./Matrix2-48c16a80', './AxisAlignedBoundingBox-f8eef3e4', './Transforms
    */
   HeightmapTessellator.computeVertices = function (options) {
     //>>includeStart('debug', pragmas.debug);
-    if (!when.defined(options) || !when.defined(options.heightmap)) {
+    if (!defaultValue.defined(options) || !defaultValue.defined(options.heightmap)) {
       throw new RuntimeError.DeveloperError("options.heightmap is required.");
     }
-    if (!when.defined(options.width) || !when.defined(options.height)) {
+    if (!defaultValue.defined(options.width) || !defaultValue.defined(options.height)) {
       throw new RuntimeError.DeveloperError("options.width and options.height are required.");
     }
-    if (!when.defined(options.nativeRectangle)) {
+    if (!defaultValue.defined(options.nativeRectangle)) {
       throw new RuntimeError.DeveloperError("options.nativeRectangle is required.");
     }
-    if (!when.defined(options.skirtHeight)) {
+    if (!defaultValue.defined(options.skirtHeight)) {
       throw new RuntimeError.DeveloperError("options.skirtHeight is required.");
     }
     //>>includeEnd('debug');
@@ -160,8 +160,8 @@ define(['./Matrix2-48c16a80', './AxisAlignedBoundingBox-f8eef3e4', './Transforms
     const skirtHeight = options.skirtHeight;
     const hasSkirts = skirtHeight > 0.0;
 
-    const isGeographic = when.defaultValue(options.isGeographic, true);
-    const ellipsoid = when.defaultValue(options.ellipsoid, Matrix2.Ellipsoid.WGS84);
+    const isGeographic = defaultValue.defaultValue(options.isGeographic, true);
+    const ellipsoid = defaultValue.defaultValue(options.ellipsoid, Matrix2.Ellipsoid.WGS84);
 
     const oneOverGlobeSemimajorAxis = 1.0 / ellipsoid.maximumRadius;
 
@@ -173,7 +173,7 @@ define(['./Matrix2-48c16a80', './AxisAlignedBoundingBox-f8eef3e4', './Transforms
     let geographicEast;
     let geographicNorth;
 
-    if (!when.defined(rectangle)) {
+    if (!defaultValue.defined(rectangle)) {
       if (isGeographic) {
         geographicWest = toRadians(nativeRectangle.west);
         geographicSouth = toRadians(nativeRectangle.south);
@@ -197,43 +197,43 @@ define(['./Matrix2-48c16a80', './AxisAlignedBoundingBox-f8eef3e4', './Transforms
     }
 
     let relativeToCenter = options.relativeToCenter;
-    const hasRelativeToCenter = when.defined(relativeToCenter);
+    const hasRelativeToCenter = defaultValue.defined(relativeToCenter);
     relativeToCenter = hasRelativeToCenter ? relativeToCenter : Matrix2.Cartesian3.ZERO;
-    const includeWebMercatorT = when.defaultValue(options.includeWebMercatorT, false);
+    const includeWebMercatorT = defaultValue.defaultValue(options.includeWebMercatorT, false);
 
-    const exaggeration = when.defaultValue(options.exaggeration, 1.0);
-    const exaggerationRelativeHeight = when.defaultValue(
+    const exaggeration = defaultValue.defaultValue(options.exaggeration, 1.0);
+    const exaggerationRelativeHeight = defaultValue.defaultValue(
       options.exaggerationRelativeHeight,
       0.0
     );
     const hasExaggeration = exaggeration !== 1.0;
     const includeGeodeticSurfaceNormals = hasExaggeration;
 
-    const structure = when.defaultValue(
+    const structure = defaultValue.defaultValue(
       options.structure,
       HeightmapTessellator.DEFAULT_STRUCTURE
     );
-    const heightScale = when.defaultValue(
+    const heightScale = defaultValue.defaultValue(
       structure.heightScale,
       HeightmapTessellator.DEFAULT_STRUCTURE.heightScale
     );
-    const heightOffset = when.defaultValue(
+    const heightOffset = defaultValue.defaultValue(
       structure.heightOffset,
       HeightmapTessellator.DEFAULT_STRUCTURE.heightOffset
     );
-    const elementsPerHeight = when.defaultValue(
+    const elementsPerHeight = defaultValue.defaultValue(
       structure.elementsPerHeight,
       HeightmapTessellator.DEFAULT_STRUCTURE.elementsPerHeight
     );
-    const stride = when.defaultValue(
+    const stride = defaultValue.defaultValue(
       structure.stride,
       HeightmapTessellator.DEFAULT_STRUCTURE.stride
     );
-    const elementMultiplier = when.defaultValue(
+    const elementMultiplier = defaultValue.defaultValue(
       structure.elementMultiplier,
       HeightmapTessellator.DEFAULT_STRUCTURE.elementMultiplier
     );
-    const isBigEndian = when.defaultValue(
+    const isBigEndian = defaultValue.defaultValue(
       structure.isBigEndian,
       HeightmapTessellator.DEFAULT_STRUCTURE.isBigEndian
     );
@@ -486,7 +486,7 @@ define(['./Matrix2-48c16a80', './AxisAlignedBoundingBox-f8eef3e4', './Transforms
 
     const boundingSphere3D = Transforms.BoundingSphere.fromPoints(positions);
     let orientedBoundingBox;
-    if (when.defined(rectangle)) {
+    if (defaultValue.defined(rectangle)) {
       orientedBoundingBox = OrientedBoundingBox.OrientedBoundingBox.fromRectangle(
         rectangle,
         minimumHeight,
@@ -547,7 +547,7 @@ define(['./Matrix2-48c16a80', './AxisAlignedBoundingBox-f8eef3e4', './Transforms
 
   /* This file is automatically rebuilt by the Cesium build process. */
 
-  var LercDecode = when.createCommonjsModule(function (module) {
+  var LercDecode = _commonjsHelpers3aae1032.createCommonjsModule(function (module) {
   /* jshint forin: false, bitwise: false */
   /*
   Copyright 2015-2018 Esri

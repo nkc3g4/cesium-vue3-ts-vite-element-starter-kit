@@ -1,5 +1,5 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./AttributeCompression-b90e9889', './Matrix2-48c16a80', './ComponentDatatype-9c5a06cd', './createTaskProcessorWorker', './RuntimeError-ec3b0f53', './when-8166c7dd', './WebGLConstants-7dccdc96'], (function (AttributeCompression, Matrix2, ComponentDatatype, createTaskProcessorWorker, RuntimeError, when, WebGLConstants) { 'use strict';
+define(['./AttributeCompression-b89638a2', './Matrix2-feb45b00', './ComponentDatatype-b1ea011a', './createTaskProcessorWorker', './RuntimeError-c581ca93', './defaultValue-94c3e563', './WebGLConstants-7dccdc96'], (function (AttributeCompression, Matrix2, ComponentDatatype, createTaskProcessorWorker, RuntimeError, defaultValue, WebGLConstants) { 'use strict';
 
   const maxShort = 32767;
 

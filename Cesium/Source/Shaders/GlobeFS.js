@@ -172,7 +172,7 @@ alpha = tempColor.a;\n\
 color = pow(color, vec3(textureOneOverGamma));\n\
 #endif\n\
 #ifdef APPLY_SPLIT\n\
-float splitPosition = czm_imagerySplitPosition;\n\
+float splitPosition = czm_splitPosition;\n\
 if (split < 0.0 && gl_FragCoord.x > splitPosition) {\n\
 alpha = 0.0;\n\
 }\n\

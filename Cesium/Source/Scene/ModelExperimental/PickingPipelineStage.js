@@ -6,6 +6,7 @@ import defaultValue from "../../Core/defaultValue.js";
 import defined from "../../Core/defined.js";
 import ShaderDestination from "../../Renderer/ShaderDestination.js";
 import ModelExperimentalType from "./ModelExperimentalType.js";
+import ModelExperimentalUtility from "./ModelExperimentalUtility.js";
 
 /**
  * The picking pipeline stage is responsible for handling picking of primitives.
@@ -50,7 +51,6 @@ PickingPipelineStage.process = function (
 
     const pickId = context.createPickId(pickObject);
     if(typeof(renderResources.runtimeNode.pickIds) === 'undefined'){
-      //
       renderResources.runtimeNode.pickIds = [pickId];
     }else{
       renderResources.runtimeNode.pickIds.push(pickId);
@@ -116,19 +116,25 @@ function processPickTexture(renderResources, primitive, instances) {
   const model = renderResources.model;
   let featureTableId;
   let featureIdAttribute;
-  const featureIdIndex = model.featureIdIndex;
-  const instanceFeatureIdIndex = model.instanceFeatureIdIndex;
+  const featureIdLabel = model.featureIdLabel;
+  const instanceFeatureIdLabel = model.instanceFeatureIdLabel;
 
   if (defined(model.featureTableId)) {
     // Extract the Feature Table ID from the Cesium3DTileContent.
     featureTableId = model.featureTableId;
   } else if (defined(instances)) {
     // Extract the Feature Table ID from the instanced Feature ID attributes.
-    featureIdAttribute = instances.featureIds[instanceFeatureIdIndex];
+    featureIdAttribute = ModelExperimentalUtility.getFeatureIdsByLabel(
+      instances.featureIds,
+      instanceFeatureIdLabel
+    );
     featureTableId = featureIdAttribute.propertyTableId;
   } else {
     // Extract the Feature Table ID from the primitive Feature ID attributes.
-    featureIdAttribute = primitive.featureIds[featureIdIndex];
+    featureIdAttribute = ModelExperimentalUtility.getFeatureIdsByLabel(
+      primitive.featureIds,
+      featureIdLabel
+    );
     featureTableId = featureIdAttribute.propertyTableId;
   }
 

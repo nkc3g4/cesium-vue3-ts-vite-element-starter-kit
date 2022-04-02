@@ -1,7 +1,7 @@
 /* This file is automatically rebuilt by the Cesium build process. */
 import { c as createCommonjsModule } from './_commonjsHelpers-3aae1032.js';
 
-var graphemeSplitter = createCommonjsModule(function (module) {
+var _graphemeSplitter_1_0_4_graphemeSplitter = createCommonjsModule(function (module) {
 /*
 Breaks a Javascript string into individual user-perceived "characters" 
 called extended grapheme clusters by implementing the Unicode UAX-29 standard, version 10.0.0
@@ -1747,4 +1747,4 @@ if (module.exports) {
 }
 });
 
-export { graphemeSplitter as default };
+export { _graphemeSplitter_1_0_4_graphemeSplitter as default };

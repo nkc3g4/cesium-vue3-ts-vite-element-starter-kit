@@ -29,13 +29,11 @@ body {
 }
 
 .cesium-infoBox-defaultTable tr:nth-child(odd) {
-  /* background-color: rgba(84, 84, 84, 0.8); */
-  background-color: linear-gradient(141deg, #396aaf4d 1%, #396aaf0f 90%);
+  background-color: rgba(84, 84, 84, 0.8);
 }
 
 .cesium-infoBox-defaultTable tr:nth-child(even) {
-  /* background-color: rgba(84, 84, 84, 0.25); */
-  background-color: linear-gradient(141deg, #396aaf4d 1%, #396aaf0f 90%);
+  background-color: rgba(84, 84, 84, 0.25);
 }
 
 .cesium-infoBox-defaultTable th {

@@ -1,5 +1,5 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./ComponentDatatype-9c5a06cd', './when-8166c7dd', './IndexDatatype-ed482b61', './RuntimeError-ec3b0f53', './createTaskProcessorWorker', './WebGLConstants-7dccdc96'], (function (ComponentDatatype, when, IndexDatatype, RuntimeError, createTaskProcessorWorker, WebGLConstants) { 'use strict';
+define(['./ComponentDatatype-b1ea011a', './defaultValue-94c3e563', './IndexDatatype-c4099fe9', './RuntimeError-c581ca93', './createTaskProcessorWorker', './WebGLConstants-7dccdc96'], (function (ComponentDatatype, defaultValue, IndexDatatype, RuntimeError, createTaskProcessorWorker, WebGLConstants) { 'use strict';
 
   /* global require */
 
@@ -184,7 +184,7 @@ define(['./ComponentDatatype-9c5a06cd', './when-8166c7dd', './IndexDatatype-ed48
 
     const vertexArrayLength = numPoints * numComponents;
     let vertexArray;
-    if (when.defined(quantization)) {
+    if (defaultValue.defined(quantization)) {
       vertexArray = decodeQuantizedDracoTypedArray(
         dracoGeometry,
         dracoDecoder,
@@ -342,7 +342,7 @@ define(['./ComponentDatatype-9c5a06cd', './when-8166c7dd', './IndexDatatype-ed48
   }
 
   function decode(parameters) {
-    if (when.defined(parameters.bufferView)) {
+    if (defaultValue.defined(parameters.bufferView)) {
       return decodePrimitive(parameters);
     }
     return decodePointCloud(parameters);
@@ -359,11 +359,11 @@ define(['./ComponentDatatype-9c5a06cd', './when-8166c7dd', './IndexDatatype-ed48
 
     // Expect the first message to be to load a web assembly module
     const wasmConfig = data.webAssemblyConfig;
-    if (when.defined(wasmConfig)) {
+    if (defaultValue.defined(wasmConfig)) {
       // Require and compile WebAssembly module, or use fallback if not supported
       return require([wasmConfig.modulePath], function (dracoModule) {
-        if (when.defined(wasmConfig.wasmBinaryFile)) {
-          if (!when.defined(dracoModule)) {
+        if (defaultValue.defined(wasmConfig.wasmBinaryFile)) {
+          if (!defaultValue.defined(dracoModule)) {
             dracoModule = self.DracoDecoderModule;
           }
 

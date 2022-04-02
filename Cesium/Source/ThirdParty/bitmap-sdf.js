@@ -1,5 +1,5 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-var clamp_1 = clamp;
+var _clamp_1_0_1_clamp = clamp;
 
 function clamp(value, min, max) {
   return min < max
@@ -7,7 +7,7 @@ function clamp(value, min, max) {
     : (value < max ? max : value > min ? min : value)
 }
 
-var bitmapSdf = calcSDF;
+var _bitmapSdf_1_0_3_bitmapSdf = calcSDF;
 
 var INF = 1e20;
 
@@ -88,7 +88,7 @@ function calcSDF(src, options) {
     var dist = window.Float32Array ? new Float32Array(w * h) : new Array(w * h);
 
     for (i = 0, l = w*h; i < l; i++) {
-        dist[i] = clamp_1(1 - ( (gridOuter[i] - gridInner[i]) / radius + cutoff), 0, 1);
+        dist[i] = _clamp_1_0_1_clamp(1 - ( (gridOuter[i] - gridInner[i]) / radius + cutoff), 0, 1);
     }
 
     return dist
@@ -140,4 +140,4 @@ function edt1d(f, d, v, z, n) {
     }
 }
 
-export { bitmapSdf as default };
+export { _bitmapSdf_1_0_3_bitmapSdf as default };

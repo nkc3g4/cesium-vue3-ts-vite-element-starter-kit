@@ -1,5 +1,5 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./when-8166c7dd', './Matrix2-48c16a80', './arrayRemoveDuplicates-8aa05a3d', './BoundingRectangle-d9d98fb1', './Transforms-a91b6c40', './ComponentDatatype-9c5a06cd', './PolylineVolumeGeometryLibrary-d250fdc6', './RuntimeError-ec3b0f53', './GeometryAttribute-6ac0bf83', './GeometryAttributes-50becc99', './GeometryPipeline-d53b53f4', './IndexDatatype-ed482b61', './PolygonPipeline-5c0805be', './VertexFormat-36162c59', './combine-ed18558d', './WebGLConstants-7dccdc96', './EllipsoidTangentPlane-e87970b1', './AxisAlignedBoundingBox-f8eef3e4', './IntersectionTests-ef21c31d', './Plane-d604146d', './PolylinePipeline-dc8ba823', './EllipsoidGeodesic-9be6c4a4', './EllipsoidRhumbLine-18e41c26', './AttributeCompression-b90e9889', './EncodedCartesian3-316be0be'], (function (when, Matrix2, arrayRemoveDuplicates, BoundingRectangle, Transforms, ComponentDatatype, PolylineVolumeGeometryLibrary, RuntimeError, GeometryAttribute, GeometryAttributes, GeometryPipeline, IndexDatatype, PolygonPipeline, VertexFormat, combine, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane, PolylinePipeline, EllipsoidGeodesic, EllipsoidRhumbLine, AttributeCompression, EncodedCartesian3) { 'use strict';
+define(['./defaultValue-94c3e563', './Matrix2-feb45b00', './arrayRemoveDuplicates-87160c89', './BoundingRectangle-cc140f28', './Transforms-c9f24aab', './ComponentDatatype-b1ea011a', './PolylineVolumeGeometryLibrary-4cb5bf8d', './RuntimeError-c581ca93', './GeometryAttribute-a247c9b5', './GeometryAttributes-7df9bef6', './GeometryPipeline-8bdf78c5', './IndexDatatype-c4099fe9', './PolygonPipeline-fcd342cf', './VertexFormat-e46f29d6', './_commonjsHelpers-3aae1032-f55dc0c4', './combine-761d9c3f', './WebGLConstants-7dccdc96', './EllipsoidTangentPlane-e5585342', './AxisAlignedBoundingBox-79bc34f8', './IntersectionTests-cddae83a', './Plane-d4dd64b5', './PolylinePipeline-37daf402', './EllipsoidGeodesic-0f954b03', './EllipsoidRhumbLine-be32f017', './AttributeCompression-b89638a2', './EncodedCartesian3-7fbeca3f'], (function (defaultValue, Matrix2, arrayRemoveDuplicates, BoundingRectangle, Transforms, ComponentDatatype, PolylineVolumeGeometryLibrary, RuntimeError, GeometryAttribute, GeometryAttributes, GeometryPipeline, IndexDatatype, PolygonPipeline, VertexFormat, _commonjsHelpers3aae1032, combine, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane, PolylinePipeline, EllipsoidGeodesic, EllipsoidRhumbLine, AttributeCompression, EncodedCartesian3) { 'use strict';
 
   function computeAttributes(
     combinedPositions,
@@ -186,15 +186,15 @@ define(['./when-8166c7dd', './Matrix2-48c16a80', './arrayRemoveDuplicates-8aa05a
    * });
    */
   function PolylineVolumeGeometry(options) {
-    options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
+    options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
     const positions = options.polylinePositions;
     const shape = options.shapePositions;
 
     //>>includeStart('debug', pragmas.debug);
-    if (!when.defined(positions)) {
+    if (!defaultValue.defined(positions)) {
       throw new RuntimeError.DeveloperError("options.polylinePositions is required.");
     }
-    if (!when.defined(shape)) {
+    if (!defaultValue.defined(shape)) {
       throw new RuntimeError.DeveloperError("options.shapePositions is required.");
     }
     //>>includeEnd('debug');
@@ -202,13 +202,13 @@ define(['./when-8166c7dd', './Matrix2-48c16a80', './arrayRemoveDuplicates-8aa05a
     this._positions = positions;
     this._shape = shape;
     this._ellipsoid = Matrix2.Ellipsoid.clone(
-      when.defaultValue(options.ellipsoid, Matrix2.Ellipsoid.WGS84)
+      defaultValue.defaultValue(options.ellipsoid, Matrix2.Ellipsoid.WGS84)
     );
-    this._cornerType = when.defaultValue(options.cornerType, PolylineVolumeGeometryLibrary.CornerType.ROUNDED);
+    this._cornerType = defaultValue.defaultValue(options.cornerType, PolylineVolumeGeometryLibrary.CornerType.ROUNDED);
     this._vertexFormat = VertexFormat.VertexFormat.clone(
-      when.defaultValue(options.vertexFormat, VertexFormat.VertexFormat.DEFAULT)
+      defaultValue.defaultValue(options.vertexFormat, VertexFormat.VertexFormat.DEFAULT)
     );
-    this._granularity = when.defaultValue(
+    this._granularity = defaultValue.defaultValue(
       options.granularity,
       ComponentDatatype.CesiumMath.RADIANS_PER_DEGREE
     );
@@ -236,15 +236,15 @@ define(['./when-8166c7dd', './Matrix2-48c16a80', './arrayRemoveDuplicates-8aa05a
    */
   PolylineVolumeGeometry.pack = function (value, array, startingIndex) {
     //>>includeStart('debug', pragmas.debug);
-    if (!when.defined(value)) {
+    if (!defaultValue.defined(value)) {
       throw new RuntimeError.DeveloperError("value is required");
     }
-    if (!when.defined(array)) {
+    if (!defaultValue.defined(array)) {
       throw new RuntimeError.DeveloperError("array is required");
     }
     //>>includeEnd('debug');
 
-    startingIndex = when.defaultValue(startingIndex, 0);
+    startingIndex = defaultValue.defaultValue(startingIndex, 0);
 
     let i;
 
@@ -297,12 +297,12 @@ define(['./when-8166c7dd', './Matrix2-48c16a80', './arrayRemoveDuplicates-8aa05a
    */
   PolylineVolumeGeometry.unpack = function (array, startingIndex, result) {
     //>>includeStart('debug', pragmas.debug);
-    if (!when.defined(array)) {
+    if (!defaultValue.defined(array)) {
       throw new RuntimeError.DeveloperError("array is required");
     }
     //>>includeEnd('debug');
 
-    startingIndex = when.defaultValue(startingIndex, 0);
+    startingIndex = defaultValue.defaultValue(startingIndex, 0);
 
     let i;
 
@@ -333,7 +333,7 @@ define(['./when-8166c7dd', './Matrix2-48c16a80', './arrayRemoveDuplicates-8aa05a
     const cornerType = array[startingIndex++];
     const granularity = array[startingIndex];
 
-    if (!when.defined(result)) {
+    if (!defaultValue.defined(result)) {
       scratchOptions.polylinePositions = positions;
       scratchOptions.shapePositions = shape;
       scratchOptions.cornerType = cornerType;
@@ -395,7 +395,7 @@ define(['./when-8166c7dd', './Matrix2-48c16a80', './arrayRemoveDuplicates-8aa05a
   };
 
   function createPolylineVolumeGeometry(polylineVolumeGeometry, offset) {
-    if (when.defined(offset)) {
+    if (defaultValue.defined(offset)) {
       polylineVolumeGeometry = PolylineVolumeGeometry.unpack(
         polylineVolumeGeometry,
         offset

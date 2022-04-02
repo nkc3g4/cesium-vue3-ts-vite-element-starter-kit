@@ -1,5 +1,5 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./AttributeCompression-b90e9889', './Matrix2-48c16a80', './Color-cc8b6b48', './when-8166c7dd', './IndexDatatype-ed482b61', './ComponentDatatype-9c5a06cd', './OrientedBoundingBox-0c4e9bcf', './createTaskProcessorWorker', './RuntimeError-ec3b0f53', './Transforms-a91b6c40', './combine-ed18558d', './WebGLConstants-7dccdc96', './EllipsoidTangentPlane-e87970b1', './AxisAlignedBoundingBox-f8eef3e4', './IntersectionTests-ef21c31d', './Plane-d604146d'], (function (AttributeCompression, Matrix2, Color, when, IndexDatatype, ComponentDatatype, OrientedBoundingBox, createTaskProcessorWorker, RuntimeError, Transforms, combine, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane) { 'use strict';
+define(['./AttributeCompression-b89638a2', './Matrix2-feb45b00', './Color-de24acbe', './defaultValue-94c3e563', './IndexDatatype-c4099fe9', './ComponentDatatype-b1ea011a', './OrientedBoundingBox-2cc6d1a0', './createTaskProcessorWorker', './RuntimeError-c581ca93', './Transforms-c9f24aab', './_commonjsHelpers-3aae1032-f55dc0c4', './combine-761d9c3f', './WebGLConstants-7dccdc96', './EllipsoidTangentPlane-e5585342', './AxisAlignedBoundingBox-79bc34f8', './IntersectionTests-cddae83a', './Plane-d4dd64b5'], (function (AttributeCompression, Matrix2, Color, defaultValue, IndexDatatype, ComponentDatatype, OrientedBoundingBox, createTaskProcessorWorker, RuntimeError, Transforms, _commonjsHelpers3aae1032, combine, WebGLConstants, EllipsoidTangentPlane, AxisAlignedBoundingBox, IntersectionTests, Plane) { 'use strict';
 
   const scratchCenter = new Matrix2.Cartesian3();
   const scratchEllipsoid = new Matrix2.Ellipsoid();
@@ -118,7 +118,7 @@ define(['./AttributeCompression-b90e9889', './Matrix2-48c16a80', './Color-cc8b6b
 
     let minimumHeights = parameters.minimumHeights;
     let maximumHeights = parameters.maximumHeights;
-    if (when.defined(minimumHeights) && when.defined(maximumHeights)) {
+    if (defaultValue.defined(minimumHeights) && defaultValue.defined(maximumHeights)) {
       minimumHeights = new Float32Array(minimumHeights);
       maximumHeights = new Float32Array(maximumHeights);
     }
@@ -170,7 +170,7 @@ define(['./AttributeCompression-b90e9889', './Matrix2-48c16a80', './Color-cc8b6b
     const colorToBuffers = {};
     for (i = 0; i < countsLength; ++i) {
       rgba = batchTableColors[i];
-      if (!when.defined(colorToBuffers[rgba])) {
+      if (!defaultValue.defined(colorToBuffers[rgba])) {
         colorToBuffers[rgba] = {
           positionLength: counts[i],
           indexLength: indexCounts[i],
@@ -234,7 +234,7 @@ define(['./AttributeCompression-b90e9889', './Matrix2-48c16a80', './Color-cc8b6b
 
       let polygonMinimumHeight = minHeight;
       let polygonMaximumHeight = maxHeight;
-      if (when.defined(minimumHeights) && when.defined(maximumHeights)) {
+      if (defaultValue.defined(minimumHeights) && defaultValue.defined(maximumHeights)) {
         polygonMinimumHeight = minimumHeights[i];
         polygonMaximumHeight = maximumHeights[i];
       }

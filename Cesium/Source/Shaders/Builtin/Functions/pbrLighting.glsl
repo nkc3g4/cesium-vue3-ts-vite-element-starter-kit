@@ -74,7 +74,7 @@ vec3 czm_pbrLighting(
     vec3 l = normalize(lightDirectionEC);
     vec3 h = normalize(v + l);
     vec3 n = normalEC;
-    float NdotL = clamp(dot(n, l), 0.05, 1.0);  //WAS 0.001 SHADOW DARKNESS
+    float NdotL = clamp(dot(n, l), 0.001, 1.0);
     float NdotV = abs(dot(n, v)) + 0.001;
     float NdotH = clamp(dot(n, h), 0.0, 1.0);
     float LdotH = clamp(dot(l, h), 0.0, 1.0);

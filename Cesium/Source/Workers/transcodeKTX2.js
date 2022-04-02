@@ -1,5 +1,5 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./when-8166c7dd', './RuntimeError-ec3b0f53', './WebGLConstants-7dccdc96', './createTaskProcessorWorker'], (function (when, RuntimeError, WebGLConstants, createTaskProcessorWorker) { 'use strict';
+define(['./defaultValue-94c3e563', './RuntimeError-c581ca93', './WebGLConstants-7dccdc96', './createTaskProcessorWorker'], (function (defaultValue, RuntimeError, WebGLConstants, createTaskProcessorWorker) { 'use strict';
 
   /**
    * The data type of a pixel.
@@ -975,7 +975,7 @@ define(['./when-8166c7dd', './RuntimeError-ec3b0f53', './WebGLConstants-7dccdc96
         const faceByteOffset =
           levelBuffer.byteOffset + faceLength * header.typeSize * j;
         let faceView;
-        if (!when.defined(datatype) || PixelDatatype$1.sizeInBytes(datatype) === 1) {
+        if (!defaultValue.defined(datatype) || PixelDatatype$1.sizeInBytes(datatype) === 1) {
           faceView = new Uint8Array(
             levelBuffer.buffer,
             faceByteOffset,
@@ -1135,7 +1135,7 @@ define(['./when-8166c7dd', './RuntimeError-ec3b0f53', './WebGLConstants-7dccdc96
         -1 // channel1
       );
 
-      if (!when.defined(transcoded)) {
+      if (!defaultValue.defined(transcoded)) {
         throw new RuntimeError.RuntimeError("transcodeImage() failed.");
       }
 
@@ -1167,11 +1167,11 @@ define(['./when-8166c7dd', './RuntimeError-ec3b0f53', './WebGLConstants-7dccdc96
 
     // Expect the first message to be to load a web assembly module
     const wasmConfig = data.webAssemblyConfig;
-    if (when.defined(wasmConfig)) {
+    if (defaultValue.defined(wasmConfig)) {
       // Require and compile WebAssembly module, or use fallback if not supported
       return require([wasmConfig.modulePath], function (mscBasisTranscoder) {
-        if (when.defined(wasmConfig.wasmBinaryFile)) {
-          if (!when.defined(mscBasisTranscoder)) {
+        if (defaultValue.defined(wasmConfig.wasmBinaryFile)) {
+          if (!defaultValue.defined(mscBasisTranscoder)) {
             mscBasisTranscoder = self.MSC_TRANSCODER;
           }
 

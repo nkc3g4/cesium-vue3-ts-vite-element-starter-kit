@@ -29,7 +29,7 @@
   display: block;
   height: 20px;
   padding: 5px 30px 5px 25px;
-  background: linear-gradient(141deg, #396aaf4d 1%, #396aaf0f 90%);
+  background: rgba(84, 84, 84, 1);
   border-top-left-radius: 7px;
   text-align: center;
   text-overflow: ellipsis;
@@ -43,7 +43,7 @@
 }
 
 button.cesium-infoBox-camera {
-  display: none;
+  display: block;
   position: absolute;
   top: 4px;
   left: 4px;
@@ -95,5 +95,4 @@ button.cesium-infoBox-close:active {
   border: none;
   width: 100%; /* Fallback */
   width: calc(100% - 2px);
-  background: linear-gradient(141deg, #396aaf4d 1%, #396aaf0f 90%);
 }

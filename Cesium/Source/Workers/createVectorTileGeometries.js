@@ -1,5 +1,5 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./Transforms-a91b6c40', './BoxGeometry-e5fdfc06', './Matrix2-48c16a80', './Color-cc8b6b48', './CylinderGeometry-dee1a8b4', './when-8166c7dd', './EllipsoidGeometry-bc0b9b9b', './IndexDatatype-ed482b61', './createTaskProcessorWorker', './RuntimeError-ec3b0f53', './ComponentDatatype-9c5a06cd', './WebGLConstants-7dccdc96', './combine-ed18558d', './GeometryOffsetAttribute-19e8bbd6', './GeometryAttribute-6ac0bf83', './GeometryAttributes-50becc99', './VertexFormat-36162c59', './CylinderGeometryLibrary-611ba5d7'], (function (Transforms, BoxGeometry, Matrix2, Color, CylinderGeometry, when, EllipsoidGeometry, IndexDatatype, createTaskProcessorWorker, RuntimeError, ComponentDatatype, WebGLConstants, combine, GeometryOffsetAttribute, GeometryAttribute, GeometryAttributes, VertexFormat, CylinderGeometryLibrary) { 'use strict';
+define(['./Transforms-c9f24aab', './BoxGeometry-61b5baf7', './Matrix2-feb45b00', './Color-de24acbe', './CylinderGeometry-1319a620', './defaultValue-94c3e563', './EllipsoidGeometry-cccb040b', './IndexDatatype-c4099fe9', './createTaskProcessorWorker', './RuntimeError-c581ca93', './ComponentDatatype-b1ea011a', './WebGLConstants-7dccdc96', './_commonjsHelpers-3aae1032-f55dc0c4', './combine-761d9c3f', './GeometryOffsetAttribute-3e8c299c', './GeometryAttribute-a247c9b5', './GeometryAttributes-7df9bef6', './VertexFormat-e46f29d6', './CylinderGeometryLibrary-1ace08dc'], (function (Transforms, BoxGeometry, Matrix2, Color, CylinderGeometry, defaultValue, EllipsoidGeometry, IndexDatatype, createTaskProcessorWorker, RuntimeError, ComponentDatatype, WebGLConstants, _commonjsHelpers3aae1032, combine, GeometryOffsetAttribute, GeometryAttribute, GeometryAttributes, VertexFormat, CylinderGeometryLibrary) { 'use strict';
 
   /**
    * Describes a renderable batch of geometry.
@@ -152,7 +152,7 @@ define(['./Transforms-a91b6c40', './BoxGeometry-e5fdfc06', './Matrix2-48c16a80',
     geometry,
     getModelMatrixAndBoundingVolume
   ) {
-    if (!when.defined(primitive)) {
+    if (!defaultValue.defined(primitive)) {
       return;
     }
 
@@ -296,35 +296,35 @@ define(['./Transforms-a91b6c40', './BoxGeometry-e5fdfc06', './Matrix2-48c16a80',
   }
 
   function createVectorTileGeometries(parameters, transferableObjects) {
-    const boxes = when.defined(parameters.boxes)
+    const boxes = defaultValue.defined(parameters.boxes)
       ? new Float32Array(parameters.boxes)
       : undefined;
-    const boxBatchIds = when.defined(parameters.boxBatchIds)
+    const boxBatchIds = defaultValue.defined(parameters.boxBatchIds)
       ? new Uint16Array(parameters.boxBatchIds)
       : undefined;
-    const cylinders = when.defined(parameters.cylinders)
+    const cylinders = defaultValue.defined(parameters.cylinders)
       ? new Float32Array(parameters.cylinders)
       : undefined;
-    const cylinderBatchIds = when.defined(parameters.cylinderBatchIds)
+    const cylinderBatchIds = defaultValue.defined(parameters.cylinderBatchIds)
       ? new Uint16Array(parameters.cylinderBatchIds)
       : undefined;
-    const ellipsoids = when.defined(parameters.ellipsoids)
+    const ellipsoids = defaultValue.defined(parameters.ellipsoids)
       ? new Float32Array(parameters.ellipsoids)
       : undefined;
-    const ellipsoidBatchIds = when.defined(parameters.ellipsoidBatchIds)
+    const ellipsoidBatchIds = defaultValue.defined(parameters.ellipsoidBatchIds)
       ? new Uint16Array(parameters.ellipsoidBatchIds)
       : undefined;
-    const spheres = when.defined(parameters.spheres)
+    const spheres = defaultValue.defined(parameters.spheres)
       ? new Float32Array(parameters.spheres)
       : undefined;
-    const sphereBatchIds = when.defined(parameters.sphereBatchIds)
+    const sphereBatchIds = defaultValue.defined(parameters.sphereBatchIds)
       ? new Uint16Array(parameters.sphereBatchIds)
       : undefined;
 
-    const numberOfBoxes = when.defined(boxes) ? boxBatchIds.length : 0;
-    const numberOfCylinders = when.defined(cylinders) ? cylinderBatchIds.length : 0;
-    const numberOfEllipsoids = when.defined(ellipsoids) ? ellipsoidBatchIds.length : 0;
-    const numberOfSpheres = when.defined(spheres) ? sphereBatchIds.length : 0;
+    const numberOfBoxes = defaultValue.defined(boxes) ? boxBatchIds.length : 0;
+    const numberOfCylinders = defaultValue.defined(cylinders) ? cylinderBatchIds.length : 0;
+    const numberOfEllipsoids = defaultValue.defined(ellipsoids) ? ellipsoidBatchIds.length : 0;
+    const numberOfSpheres = defaultValue.defined(spheres) ? sphereBatchIds.length : 0;
 
     const boxGeometry = BoxGeometry.BoxGeometry.getUnitBox();
     const cylinderGeometry = CylinderGeometry.CylinderGeometry.getUnitCylinder();

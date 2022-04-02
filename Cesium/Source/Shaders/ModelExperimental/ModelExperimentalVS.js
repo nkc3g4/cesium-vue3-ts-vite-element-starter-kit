@@ -36,9 +36,11 @@ instancingStage(attributes.positionMC);\n\
 v_pickColor = a_pickColor;\n\
 #endif\n\
 #endif\n\
+Metadata metadata;\n\
+metadataStage(metadata, attributes);\n\
 #ifdef HAS_CUSTOM_VERTEX_SHADER\n\
 czm_modelVertexOutput vsOutput = defaultVertexOutput(attributes.positionMC);\n\
-customShaderStage(vsOutput, attributes, featureIds);\n\
+customShaderStage(vsOutput, attributes, featureIds, metadata);\n\
 #endif\n\
 geometryStage(attributes, modelView, normal);\n\
 #ifdef PRIMITIVE_TYPE_POINTS\n\

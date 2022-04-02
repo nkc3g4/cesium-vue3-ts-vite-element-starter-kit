@@ -65,7 +65,7 @@ click: function () { closeClicked.raiseEvent(this); }"
 
   const frame = document.createElement("iframe");
   frame.className = "cesium-infoBox-iframe";
-  // frame.setAttribute("sandbox", "allow-same-origin allow-popups allow-forms"); //allow-pointer-lock allow-scripts allow-top-navigation
+  frame.setAttribute("sandbox", "allow-same-origin allow-popups allow-forms"); //allow-pointer-lock allow-scripts allow-top-navigation
   frame.setAttribute(
     "data-bind",
     "style : { maxHeight : maxHeightOffset(40) }"

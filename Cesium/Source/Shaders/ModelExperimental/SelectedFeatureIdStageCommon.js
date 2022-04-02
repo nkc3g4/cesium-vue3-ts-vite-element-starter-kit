@@ -15,19 +15,26 @@ return vec2(centerX + (featureId * stepX), 0.5);\n\
 }\n\
 void selectedFeatureIdStage(out SelectedFeature feature, FeatureIds featureIds)\n\
 {\n\
-float featureId = featureIds.SELECTED_FEATURE_ID;\n\
+int featureId = featureIds.SELECTED_FEATURE_ID;\n\
 if (featureId < model_featuresLength)\n\
 {\n\
-vec2 featureSt = computeSt(featureId);\n\
-feature.id = int(featureId);\n\
+vec2 featureSt = computeSt(float(featureId));\n\
+feature.id = featureId;\n\
 feature.st = featureSt;\n\
 feature.color = texture2D(model_batchTexture, featureSt);\n\
 }\n\
 else\n\
 {\n\
-feature.id = int(model_featuresLength) + 1;\n\
+feature.id = model_featuresLength + 1;\n\
 feature.st = vec2(0.0);\n\
 feature.color = vec4(1.0);\n\
 }\n\
+#ifdef HAS_NULL_FEATURE_ID\n\
+if (featureId == model_nullFeatureId) {\n\
+feature.id = featureId;\n\
+feature.st = vec2(0.0);\n\
+feature.color = vec4(1.0);\n\
+}\n\
+#endif\n\
 }\n\
 ";

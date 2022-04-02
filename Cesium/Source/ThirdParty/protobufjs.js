@@ -2662,9 +2662,9 @@ BufferWriter.prototype.string = function write_string_buffer(value) {
 
 });
 
-var protobuf$1 = /*#__PURE__*/Object.freeze(/*#__PURE__*/_mergeNamespaces({
+var protobuf$1 = /*#__PURE__*/_mergeNamespaces({
     __proto__: null,
     'default': protobuf
-}, [protobuf]));
+}, [protobuf]);
 
 export { protobuf$1 as default };
